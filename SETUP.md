@@ -101,6 +101,8 @@ Simpan alamat contract yang di-deploy dari output.
 
 ### 3. Setup Backend
 
+> **Note:** Backend diperlukan untuk menampilkan "API Transactions" sesuai requirement UAS bagian (b).
+
 ```bash
 cd ../backend
 
@@ -200,7 +202,7 @@ Ganti MetaMask ke Sepolia testnet.
 Verifikasi alamat contract di `contractConfig.js` sesuai dengan alamat yang sudah di-deploy.
 
 ### Error koneksi backend
-Pastikan backend berjalan di port 3001 sebelum menjalankan frontend.
+Pastikan backend berjalan di port 3001 sebelum menjalankan frontend untuk menampilkan API Transactions.
 
 ### Dana tidak cukup
 Minta ETH test dari Sepolia faucet.

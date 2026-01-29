@@ -12,30 +12,30 @@
     --color-bg-secondary: #111827;
     --color-bg-card: #1a2332;
     --color-bg-input: #0d1321;
-    
+
     --color-text-primary: #f3f4f6;
     --color-text-secondary: #9ca3af;
     --color-text-muted: #6b7280;
-    
+
     --color-accent: #6366f1;
     --color-accent-hover: #818cf8;
     --color-success: #10b981;
     --color-error: #ef4444;
     --color-warning: #f59e0b;
-    
+
     --color-border: #374151;
-    
+
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-    
+
     --radius-sm: 6px;
     --radius-md: 10px;
     --radius-lg: 16px;
-    
+
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
-    
+
     --transition-fast: 150ms ease;
     --transition-normal: 250ms ease;
 }
@@ -44,7 +44,9 @@
    Reset & Base
    ======================================== */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -503,6 +505,158 @@ body {
     color: var(--color-error);
 }
 
+/* Transaction List Header */
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.list-header h2 {
+    margin-bottom: 0;
+}
+
+.refresh-btn {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.refresh-btn:hover {
+    color: var(--color-text-primary);
+    background: var(--color-bg-input);
+    border-color: var(--color-accent);
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    width: 24px;
+    height: 24px;
+    margin: 0 auto 12px;
+    border: 3px solid var(--color-border);
+    border-top-color: var(--color-accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.list-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Etherscan Links */
+.etherscan-link {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.etherscan-link:hover {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+}
+
+/* Blockchain Note */
+.blockchain-note {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+}
+
+.blockchain-note small {
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+}
+
+/* ========================================
+   API Section (Backend Data)
+   ======================================== */
+
+.api-section {
+    margin-top: 32px;
+}
+
+.api-list {
+    border-color: #22c55e;
+}
+
+.api-list .list-header h2 {
+    color: var(--color-text-primary);
+}
+
+.api-note {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+}
+
+.api-note small {
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+}
+
+.api-note code {
+    background: var(--color-bg-card);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+}
+
+.api-hint {
+    text-align: center;
+    margin-top: 12px;
+}
+
+.api-hint code {
+    background: var(--color-bg-card);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-accent);
+}
+
+/* Badges */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 20px;
+}
+
+.badge-blockchain {
+    background: rgba(99, 102, 241, 0.2);
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+}
+
+.badge-api {
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+    border: 1px solid #22c55e;
+}
+
 /* ========================================
    Footer
    ======================================== */
@@ -519,6 +673,13 @@ body {
     color: var(--color-text-muted);
 }
 
+.footer-tech {
+    margin-top: 8px;
+    font-size: 0.75rem !important;
+    color: var(--color-accent) !important;
+    font-family: var(--font-mono);
+}
+
 /* ========================================
    Responsive Adjustments
    ======================================== */
@@ -528,37 +689,37 @@ body {
         flex-direction: column;
         align-items: stretch;
     }
-    
+
     .wallet-connect {
         align-items: stretch;
     }
-    
+
     .wallet-info {
         flex-direction: column;
         gap: 12px;
     }
-    
+
     .wallet-details {
         flex-wrap: wrap;
         justify-content: center;
     }
-    
+
     .hero h2 {
         font-size: 1.5rem;
     }
-    
+
     .donation-form {
         flex-direction: column;
     }
-    
+
     .btn-donate {
         width: 100%;
     }
-    
+
     .stats-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .transactions-table th,
     .transactions-table td {
         padding: 10px 12px;
@@ -570,13 +731,13 @@ body {
     .container {
         padding: 0 16px;
     }
-    
+
     .donation-form-container,
     .donation-stats,
     .transaction-list {
         padding: 16px;
     }
-    
+
     .stat-value {
         font-size: 1.5rem;
     }

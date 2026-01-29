@@ -9,16 +9,18 @@ Platform ini memungkinkan donasi yang transparan dan terverifikasi menggunakan s
 ## Arsitektur
 
 ```
-Frontend (React + Vite)     Backend (Express.js)
-        |                           |
-        |--- Ethers.js ------------>|
-        |                           |
-        v                           v
-   Smart Contract            REST API
-   (Sepolia)              (/api/transactions)
+Frontend (React + Vite)
+        |
+        |--- Ethers.js ---------> Smart Contract (Sepolia)
+        |
+        |--- Etherscan API -----> On-chain Transaction History
+        |
+        |--- REST API ----------> Backend Dummy Data (Express.js)
 ```
 
-Frontend berkomunikasi langsung dengan smart contract untuk operasi on-chain dan dengan backend untuk data transaksi off-chain.
+Frontend menampilkan data dari **KEDUA** sumber:
+1. **Blockchain** - Transaksi real dari Etherscan API
+2. **Backend API** - Data dummy dari Express.js endpoint
 
 ## Tech Stack
 
@@ -36,7 +38,10 @@ Frontend berkomunikasi langsung dengan smart contract untuk operasi on-chain dan
 - Menampilkan saldo ETH
 - Donasi on-chain melalui smart contract
 - Statistik donasi real-time dari contract
-- Riwayat transaksi off-chain dari backend API
+- **Dual Transaction Display:**
+  - 🔗 On-chain Transactions (dari Etherscan API)
+  - 📦 API Transactions (dari Backend Express.js)
+- Link ke Etherscan untuk setiap transaksi
 - UI responsif dengan tema gelap
 
 ## Struktur Proyek
@@ -60,6 +65,8 @@ transparent-donation-dapp/
 │   │   ├── components/
 │   │   ├── hooks/
 │   │   ├── utils/
+│   │   │   ├── contractConfig.js
+│   │   │   └── blockchainApi.js   # Etherscan API integration
 │   │   ├── App.jsx
 │   │   └── main.jsx
 │   └── package.json
@@ -83,11 +90,17 @@ Contract `DonationTransparent` menyediakan:
 
 ## API Endpoints
 
+### Etherscan API (On-chain - Primary)
+Transaksi diambil langsung dari blockchain Sepolia via Etherscan API.
+
+### Backend REST API (Opsional)
 | Endpoint | Metode | Deskripsi |
 |----------|--------|-----------|
-| `/api/transactions` | GET | Daftar transaksi terbaru |
+| `/api/transactions` | GET | Daftar transaksi (mock data) |
 | `/api/transactions/:id` | GET | Mendapatkan transaksi berdasarkan ID |
 | `/api/health` | GET | Cek kesehatan server |
+
+> **Note:** Backend sekarang opsional karena transaction history diambil langsung dari blockchain.
 
 ## Persyaratan
 
