@@ -4,7 +4,7 @@
  */
 
 // Replace with your deployed contract address on Sepolia
-export const CONTRACT_ADDRESS = '0x0000000000000000000000000000000000000000';
+export const CONTRACT_ADDRESS = '0xB310a3183E18Ff91D86355AFd39164Ca34A268cF';
 
 // Sepolia chain ID
 export const SEPOLIA_CHAIN_ID = 11155111;
