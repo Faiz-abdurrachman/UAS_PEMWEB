@@ -440,6 +440,80 @@ body {
     color: var(--color-text-muted);
 }
 
+/* Skeleton Loading Animation */
+.skeleton {
+    background: linear-gradient(90deg,
+            var(--color-bg-card) 25%,
+            var(--color-border) 50%,
+            var(--color-bg-card) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite ease-in-out;
+    border-radius: var(--radius-sm);
+}
+
+.skeleton-value {
+    height: 2rem;
+    width: 80px;
+    margin-bottom: 8px;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Enhanced Transaction Status */
+.tx-status-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tx-icon {
+    font-size: 1.2rem;
+}
+
+.tx-message {
+    flex: 1;
+}
+
+.tx-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* Button Spinner */
+.btn-spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-right: 8px;
+}
+
+.btn-processing {
+    cursor: wait;
+    opacity: 0.8;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 /* ========================================
    Transaction List
    ======================================== */

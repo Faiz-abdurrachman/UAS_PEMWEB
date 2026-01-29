@@ -3,7 +3,7 @@ import { useState } from 'react';
 /**
  * DonationForm Component
  * Input form for making ETH donations.
- * Handles validation and transaction status feedback.
+ * Handles validation and transaction status feedback with improved UX.
  */
 export function DonationForm({
     onDonate,
@@ -33,22 +33,39 @@ export function DonationForm({
         }
     };
 
-    const getStatusMessage = () => {
+    const getStatusConfig = () => {
         switch (txStatus) {
             case 'pending':
-                return 'Waiting for wallet confirmation...';
+                return {
+                    message: 'Waiting for wallet confirmation...',
+                    icon: '🔐',
+                    showSpinner: true
+                };
             case 'confirming':
-                return 'Transaction submitted. Waiting for confirmation...';
+                return {
+                    message: 'Transaction submitted! Confirming on blockchain...',
+                    icon: '⛓️',
+                    showSpinner: true
+                };
             case 'confirmed':
-                return 'Donation successful!';
+                return {
+                    message: 'Donation successful!',
+                    icon: '✅',
+                    showSpinner: false
+                };
             case 'failed':
-                return 'Transaction failed.';
+                return {
+                    message: 'Transaction failed.',
+                    icon: '❌',
+                    showSpinner: false
+                };
             default:
                 return null;
         }
     };
 
-    const statusMessage = getStatusMessage();
+    const statusConfig = getStatusConfig();
+    const isProcessing = txStatus === 'pending' || txStatus === 'confirming';
 
     return (
         <div className="donation-form-container">
@@ -62,21 +79,27 @@ export function DonationForm({
                         onClick={onClearError}
                         aria-label="Dismiss error"
                     >
-                        x
+                        ×
                     </button>
                 </div>
             )}
 
-            {statusMessage && (
+            {statusConfig && (
                 <div className={`tx-status tx-status-${txStatus}`}>
-                    <span>{statusMessage}</span>
+                    <div className="tx-status-content">
+                        {statusConfig.showSpinner && (
+                            <div className="tx-spinner"></div>
+                        )}
+                        <span className="tx-icon">{statusConfig.icon}</span>
+                        <span className="tx-message">{statusConfig.message}</span>
+                    </div>
                     {(txStatus === 'confirmed' || txStatus === 'failed') && (
                         <button
                             className="error-dismiss"
                             onClick={onClearTxStatus}
                             aria-label="Dismiss status"
                         >
-                            x
+                            ×
                         </button>
                     )}
                 </div>
@@ -90,7 +113,7 @@ export function DonationForm({
                         placeholder="0.01"
                         value={amount}
                         onChange={handleAmountChange}
-                        disabled={!isConnected || txStatus === 'pending' || txStatus === 'confirming'}
+                        disabled={!isConnected || isProcessing}
                         className="donation-input"
                     />
                     <span className="input-suffix">ETH</span>
@@ -98,12 +121,17 @@ export function DonationForm({
 
                 <button
                     type="submit"
-                    className="btn btn-primary btn-donate"
-                    disabled={!isConnected || !amount || txStatus === 'pending' || txStatus === 'confirming'}
+                    className={`btn btn-primary btn-donate ${isProcessing ? 'btn-processing' : ''}`}
+                    disabled={!isConnected || !amount || isProcessing}
                 >
-                    {txStatus === 'pending' || txStatus === 'confirming'
-                        ? 'Processing...'
-                        : 'Donate'}
+                    {isProcessing ? (
+                        <>
+                            <span className="btn-spinner"></span>
+                            Processing...
+                        </>
+                    ) : (
+                        'Donate'
+                    )}
                 </button>
             </form>
 
