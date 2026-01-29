@@ -1,12 +1,12 @@
-# Transparent Donation Platform
+# Platform Donasi Transparan
 
-A full-stack Web3 application for blockchain-based donations on the Ethereum Sepolia testnet.
+Aplikasi full-stack Web3 untuk donasi berbasis blockchain di Ethereum Sepolia testnet.
 
-## Overview
+## Gambaran Umum
 
-This platform enables transparent, verifiable donations using smart contracts. Users connect their MetaMask wallet, send ETH donations, and view real-time donation statistics directly from the blockchain.
+Platform ini memungkinkan donasi yang transparan dan terverifikasi menggunakan smart contract. Pengguna menghubungkan dompet MetaMask mereka, mengirim donasi ETH, dan melihat statistik donasi secara real-time langsung dari blockchain.
 
-## Architecture
+## Arsitektur
 
 ```
 Frontend (React + Vite)     Backend (Express.js)
@@ -18,28 +18,28 @@ Frontend (React + Vite)     Backend (Express.js)
    (Sepolia)              (/api/transactions)
 ```
 
-The frontend communicates directly with the smart contract for on-chain operations and with the backend for off-chain transaction data.
+Frontend berkomunikasi langsung dengan smart contract untuk operasi on-chain dan dengan backend untuk data transaksi off-chain.
 
 ## Tech Stack
 
-| Component | Technology |
-|-----------|------------|
+| Komponen | Teknologi |
+|----------|-----------|
 | Smart Contract | Solidity 0.8.20, Foundry |
 | Frontend | React 18, Vite, Ethers.js 6.x |
 | Backend | Node.js, Express.js |
-| Network | Ethereum Sepolia Testnet |
-| Wallet | MetaMask |
+| Jaringan | Ethereum Sepolia Testnet |
+| Dompet | MetaMask |
 
-## Features
+## Fitur
 
-- MetaMask wallet connection with network validation
-- ETH balance display
-- On-chain donation via smart contract
-- Real-time donation statistics from contract
-- Off-chain transaction history from backend API
-- Responsive UI with dark theme
+- Koneksi dompet MetaMask dengan validasi jaringan
+- Menampilkan saldo ETH
+- Donasi on-chain melalui smart contract
+- Statistik donasi real-time dari contract
+- Riwayat transaksi off-chain dari backend API
+- UI responsif dengan tema gelap
 
-## Project Structure
+## Struktur Proyek
 
 ```
 transparent-donation-dapp/
@@ -67,35 +67,35 @@ transparent-donation-dapp/
 └── SETUP.md
 ```
 
-## Quick Start
+## Mulai Cepat
 
-See [SETUP.md](./SETUP.md) for complete installation and setup instructions.
+Lihat [SETUP.md](./SETUP.md) untuk instruksi instalasi dan setup lengkap.
 
 ## Smart Contract
 
-The `DonationTransparent` contract provides:
+Contract `DonationTransparent` menyediakan:
 
-- `donate()` - Accept ETH donations
-- `getTotalDonations()` - Return total donated amount
-- `getDonorCount()` - Return number of unique donors
-- `getDonation(address)` - Return donation amount for address
-- `getBalance()` - Return contract balance
+- `donate()` - Menerima donasi ETH
+- `getTotalDonations()` - Mengembalikan total jumlah donasi
+- `getDonorCount()` - Mengembalikan jumlah donatur unik
+- `getDonation(address)` - Mengembalikan jumlah donasi untuk alamat tertentu
+- `getBalance()` - Mengembalikan saldo contract
 
 ## API Endpoints
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/transactions` | GET | List recent transactions |
-| `/api/transactions/:id` | GET | Get transaction by ID |
-| `/api/health` | GET | Server health check |
+| Endpoint | Metode | Deskripsi |
+|----------|--------|-----------|
+| `/api/transactions` | GET | Daftar transaksi terbaru |
+| `/api/transactions/:id` | GET | Mendapatkan transaksi berdasarkan ID |
+| `/api/health` | GET | Cek kesehatan server |
 
-## Requirements
+## Persyaratan
 
 - Node.js 18+
 - Foundry
-- MetaMask browser extension
-- Sepolia testnet ETH (from faucet)
+- Ekstensi browser MetaMask
+- ETH Sepolia testnet (dari faucet)
 
-## License
+## Lisensi
 
 MIT

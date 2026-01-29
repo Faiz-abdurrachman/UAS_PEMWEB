@@ -1,16 +1,16 @@
-# Setup Guide
+# Panduan Setup
 
-Complete setup instructions for the Transparent Donation Platform.
+Instruksi setup lengkap untuk Platform Donasi Transparan.
 
-## Prerequisites
+## Prasyarat
 
-Install the following tools before proceeding:
+Instal tools berikut sebelum melanjutkan:
 
-### Node.js (v18 or higher)
+### Node.js (v18 atau lebih tinggi)
 
-Download and install from [nodejs.org](https://nodejs.org/).
+Unduh dan instal dari [nodejs.org](https://nodejs.org/).
 
-Verify installation:
+Verifikasi instalasi:
 ```bash
 node --version
 npm --version
@@ -18,14 +18,14 @@ npm --version
 
 ### Foundry
 
-Install Foundry for smart contract development:
+Instal Foundry untuk pengembangan smart contract:
 
-**Windows (PowerShell as Administrator):**
+**Windows (PowerShell sebagai Administrator):**
 ```powershell
-# Install foundryup
+# Instal foundryup
 curl -L https://foundry.paradigm.xyz | bash
 
-# Restart terminal, then run:
+# Restart terminal, kemudian jalankan:
 foundryup
 ```
 
@@ -36,187 +36,187 @@ source ~/.bashrc
 foundryup
 ```
 
-Verify installation:
+Verifikasi instalasi:
 ```bash
 forge --version
 ```
 
 ### MetaMask
 
-Install the MetaMask browser extension from [metamask.io](https://metamask.io/).
+Instal ekstensi browser MetaMask dari [metamask.io](https://metamask.io/).
 
-Add Sepolia testnet:
-1. Open MetaMask
+Tambahkan Sepolia testnet:
+1. Buka MetaMask
 2. Settings > Networks > Add Network
-3. Select "Sepolia" from the list
+3. Pilih "Sepolia" dari daftar
 
-Get test ETH from a faucet:
+Dapatkan ETH test dari faucet:
 - [Sepolia Faucet by Alchemy](https://sepoliafaucet.com/)
 - [Infura Sepolia Faucet](https://www.infura.io/faucet/sepolia)
 
-## Project Setup
+## Setup Proyek
 
-### 1. Clone and Navigate
+### 1. Clone dan Navigasi
 
 ```bash
 cd transparent-donation-dapp
 ```
 
-### 2. Smart Contract Setup
+### 2. Setup Smart Contract
 
 ```bash
 cd contracts
 
-# Install Foundry dependencies
+# Instal dependensi Foundry
 forge install
 
-# Copy environment file
+# Salin file environment
 cp .env.example .env
 ```
 
-Edit `.env` with your values:
+Edit `.env` dengan nilai Anda:
 ```
-SEPOLIA_RPC_URL=https://eth-sepolia.g.alchemy.com/v2/YOUR_API_KEY
-PRIVATE_KEY=your_deployment_wallet_private_key
-ETHERSCAN_API_KEY=your_etherscan_api_key
+SEPOLIA_RPC_URL=https://eth-sepolia.g.alchemy.com/v2/API_KEY_ANDA
+PRIVATE_KEY=private_key_dompet_deployment_anda
+ETHERSCAN_API_KEY=api_key_etherscan_anda
 ```
 
-Get an RPC URL from [Alchemy](https://www.alchemy.com/) or [Infura](https://infura.io/).
+Dapatkan RPC URL dari [Alchemy](https://www.alchemy.com/) atau [Infura](https://infura.io/).
 
-**Build the contract:**
+**Build contract:**
 ```bash
 forge build
 ```
 
-**Deploy to Sepolia:**
+**Deploy ke Sepolia:**
 ```bash
-# Load environment variables
+# Muat variabel environment
 source .env
 
 # Deploy
 forge script script/DeployDonation.s.sol --rpc-url $SEPOLIA_RPC_URL --broadcast
 ```
 
-Save the deployed contract address from the output.
+Simpan alamat contract yang di-deploy dari output.
 
-### 3. Backend Setup
+### 3. Setup Backend
 
 ```bash
 cd ../backend
 
-# Install dependencies
+# Instal dependensi
 npm install
 
-# Copy environment file
+# Salin file environment
 cp .env.example .env
 ```
 
-**Start the server:**
+**Jalankan server:**
 ```bash
 npm run dev
 ```
 
-Server runs on http://localhost:3001
+Server berjalan di http://localhost:3001
 
-### 4. Frontend Setup
+### 4. Setup Frontend
 
 ```bash
 cd ../frontend
 
-# Install dependencies
+# Instal dependensi
 npm install
 ```
 
-**Configure contract address:**
+**Konfigurasi alamat contract:**
 
 Edit `src/utils/contractConfig.js`:
 ```javascript
-export const CONTRACT_ADDRESS = '0xYOUR_DEPLOYED_CONTRACT_ADDRESS';
+export const CONTRACT_ADDRESS = '0xALAMAT_CONTRACT_YANG_SUDAH_DIDEPLOY';
 ```
 
-**Start development server:**
+**Jalankan server development:**
 ```bash
 npm run dev
 ```
 
-Frontend runs on http://localhost:5173
+Frontend berjalan di http://localhost:5173
 
-## Environment Variables Summary
+## Ringkasan Variabel Environment
 
 ### contracts/.env
-| Variable | Description |
-|----------|-------------|
-| SEPOLIA_RPC_URL | Alchemy or Infura RPC endpoint for Sepolia |
-| PRIVATE_KEY | Deployment wallet private key |
-| ETHERSCAN_API_KEY | Optional, for contract verification |
+| Variabel | Deskripsi |
+|----------|-----------|
+| SEPOLIA_RPC_URL | Endpoint RPC Alchemy atau Infura untuk Sepolia |
+| PRIVATE_KEY | Private key dompet untuk deployment |
+| ETHERSCAN_API_KEY | Opsional, untuk verifikasi contract |
 
 ### backend/.env
-| Variable | Description |
-|----------|-------------|
-| PORT | Server port (default: 3001) |
+| Variabel | Deskripsi |
+|----------|-----------|
+| PORT | Port server (default: 3001) |
 
-## Verification Checklist
+## Checklist Verifikasi
 
-After setup, verify each component works:
+Setelah setup, verifikasi setiap komponen berfungsi:
 
 ### Contract
 ```bash
 cd contracts
 forge build
-# Expected: Successful compilation
+# Hasil yang diharapkan: Kompilasi berhasil
 ```
 
 ### Backend
 ```bash
 cd backend
 npm run dev
-# Open http://localhost:3001/api/health
-# Expected: {"status":"ok","timestamp":"..."}
+# Buka http://localhost:3001/api/health
+# Hasil yang diharapkan: {"status":"ok","timestamp":"..."}
 ```
 
 ### Frontend
 ```bash
 cd frontend
 npm run dev
-# Open http://localhost:5173
+# Buka http://localhost:5173
 ```
 
-1. Click "Connect Wallet"
-2. Approve MetaMask connection
-3. Verify address and balance display
-4. Switch to Sepolia if prompted
-5. Enter donation amount and submit
-6. Confirm transaction in MetaMask
+1. Klik "Connect Wallet"
+2. Setujui koneksi MetaMask
+3. Verifikasi alamat dan saldo ditampilkan
+4. Ganti ke Sepolia jika diminta
+5. Masukkan jumlah donasi dan submit
+6. Konfirmasi transaksi di MetaMask
 
 ## Troubleshooting
 
-### MetaMask not detected
-Ensure MetaMask extension is installed and enabled in your browser.
+### MetaMask tidak terdeteksi
+Pastikan ekstensi MetaMask sudah terinstal dan diaktifkan di browser Anda.
 
-### Wrong network error
-Switch MetaMask to Sepolia testnet.
+### Error jaringan salah
+Ganti MetaMask ke Sepolia testnet.
 
-### Contract calls fail
-Verify the contract address in `contractConfig.js` matches your deployed address.
+### Panggilan contract gagal
+Verifikasi alamat contract di `contractConfig.js` sesuai dengan alamat yang sudah di-deploy.
 
-### Backend connection error
-Ensure backend is running on port 3001 before starting frontend.
+### Error koneksi backend
+Pastikan backend berjalan di port 3001 sebelum menjalankan frontend.
 
-### Insufficient funds
-Request test ETH from a Sepolia faucet.
+### Dana tidak cukup
+Minta ETH test dari Sepolia faucet.
 
-## Build for Production
+## Build untuk Produksi
 
 ### Frontend
 ```bash
 cd frontend
 npm run build
-# Output in dist/ directory
+# Output di direktori dist/
 ```
 
 ### Backend
 ```bash
 cd backend
 npm start
-# Runs production server
+# Menjalankan server produksi
 ```
